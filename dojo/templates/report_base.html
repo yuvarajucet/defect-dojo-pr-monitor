@@ -1,0 +1,291 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ report_name }}</title>
+    <link rel="stylesheet" href="{% static "dojo/css/bootswatch/yeti/bootstrap.min.css" %}">
+    <!-- Custom Fonts -->
+    <link href="{% static "font-awesome/css/font-awesome.min.css" %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'dojo/css/custom_html_report_finding_list.css' %}" rel="stylesheet">
+
+    <style type="text/css">
+        @import url(https://fonts.googleapis.com/css?family=Roboto+Slab:400,700);
+
+        .label {
+          border-color: #DEE1E6;
+          color: #ffffff !important;
+        }
+
+        .container {
+            margin: 0 auto;
+            max-width: 960px;
+        }
+
+        .page-cover {
+            margin-bottom: 600px !important;
+        }
+
+        .page-cover-spacer {
+            height: 400px !important;
+        }
+
+        .panel-default {
+            border-color: #A1C0D7 !important;
+        }
+
+        .panel-default > .panel-heading {
+            color: #333 !important;
+            background-color: rgba(32, 166, 216, 0.75)!important;
+            border-color: rgba(32, 166, 216, 0.75) !important;
+            border-radius: 0px !important;
+        }
+
+        .panel-info {
+            border-color: #DEE1E6 !important;
+            border-radius: 0px !important;
+        }
+
+        .panel-info > .panel-heading {
+            color: #333 !important;
+            background-color: #DEE1E6 !important;
+            border-color: #DEE1E6 !important;
+            border-radius: 0px !important;
+        }
+
+        .panel-body {
+            border-radius: 0px !important;
+        }
+
+        .severity {
+            font-size: 100%;
+        }
+
+        .severity- {
+            color: black !important;
+        }
+
+        .severity-Info {
+            background-color: #888888 !important;
+        }
+
+        .severity-Low {
+            background-color: #337ab7 !important;
+        }
+
+        .severity-Medium {
+            background-color: #FBE413 !important;
+        }
+
+        .severity-High {
+            background-color: #f09835 !important;
+        }
+
+        .severity-Critical {
+            background-color: #d9534f !important;
+        }
+
+        .panel-heading {
+            padding: 1px 5px;
+        }
+
+        .page-cover {
+            page-break-after: always
+        }
+
+        .keep-together {
+            page-break-inside: avoid
+        }
+
+        #findings, #executive {
+            page-break-before: always;
+        }
+
+        .graph {
+            height: 250px;
+            width: 418px;
+        }
+
+        .graph-2x {
+            height: 250px;
+            width: 898px;
+        }
+
+        h6{
+            font-size: 120%;
+            border-bottom: 1px solid black;
+            padding-bottom: 8px;
+        }
+
+        .panel-heading h6{
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        pre, p {
+            padding: 0;
+            border: 0;
+            background-color: transparent;
+            page-break-inside: auto;
+            margin-bottom: 15px !important;
+        }
+
+        pre {
+            white-space: pre-wrap !important;
+            padding: 0 !important;
+            overflow: visible !important;
+            word-break: normal !important;
+        }
+
+        ul{
+            margin-bottom: 15px !important;
+        }
+
+        h4, .h4, h5, .h5, h6, .h6 {
+            margin-top: 20px;
+            margin-bottom: 11px;
+        }
+
+        .panel-heading h5 {
+          color: white !important;
+        }
+
+        div.pretty-graphs, .panel, .panel-body {
+            page-break-inside: avoid;
+        }
+
+        *, pre {
+            font-family: 'Roboto Slab', monospace !important;
+            font-size: 13px;
+        }
+
+        .flot-tick-label.tickLabel {
+            font-size: 11px;
+        }
+
+        .raw_request {
+            font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace !important;
+        }
+
+        .panel-warning .panel-heading h4{
+            color: #fff;
+        }
+
+        @media not print {
+            .report-page-break {
+                display: flex;
+                align-items: center;
+                text-align: center;
+            }
+            .report-page-break::before,
+            .report-page-break::after {
+                content: '';
+                flex: 1;
+                border-bottom: 1px dashed #000;
+            }
+            .report-page-break:not(:empty)::before {
+                margin-right: 0.25em;
+            }
+            .report-page-break:not(:empty)::after {
+                margin-left: 0.25em;
+            }
+        }
+
+        @media print {
+            .report-page-break {
+                page-break-after: always;
+                visibility: hidden;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- don't remove on-demand-icon ID if you remove this id the exported PDF will contain download button icon on each page. If you want to change, also change the ID on dojo/reports/helper.py file. -->
+    <div id="on-demand-icon" style="position: fixed; bottom: 40px; right: 40px; z-index: 1000;">
+        <button id="download-pdf-btn" class="btn" title="Download PDF" style="background:#1A2A80; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 1.08rem; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.2); width: 60px; height: 60px; transition: all 0.3s ease; border: none;">
+            <span id="download-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            </span>
+            <span id="loader-icon" style="display:none;">
+                <span style="display:inline-block;width:28px;height:28px;vertical-align:middle;">
+                    <svg width="28" height="28" viewBox="0 0 50 50">
+                        <circle cx="25" cy="25" r="20" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-dasharray="31.4 31.4" transform="rotate(-90 25 25)">
+                            <animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s" repeatCount="indefinite"/>
+                        </circle>
+                    </svg>
+                </span>
+            </span>
+        </button>
+    </div>
+    <div id="toast-container" style="position: fixed; bottom: 120px; right: 40px; z-index: 1100;"></div>
+{% block content %}
+    {{ block.super }}
+{% endblock %}
+{% block js %}
+<script>
+document.getElementById('download-pdf-btn').addEventListener('click', function() {
+    document.getElementById('download-icon').style.display = 'none';
+    document.getElementById('loader-icon').style.display = 'inline-block';
+    let custom_report_name = document.getElementById('custom_report_name').value;
+    if (custom_report_name === '' || custom_report_name === null || custom_report_name === undefined){
+        custom_report_name = "VAPT Report";
+    }
+    showToast('Download request sent', 'green');
+    fetch('/reports/download_report', {
+        method: 'GET',
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    })
+    .then(async response => {
+        document.getElementById('download-icon').style.display = 'inline-block';
+        document.getElementById('loader-icon').style.display = 'none';
+
+        if (response.ok && response.headers.get('content-type') === 'application/pdf') {
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = custom_report_name;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            showToast("PDF Downloaded", "green");
+            window.URL.revokeObjectURL(url);
+        } else {
+            let errorMsg = 'Failed to download PDF.';
+            showToast(errorMsg, '#d9534f');
+        }
+    })
+    .catch(error => {
+        document.getElementById('download-icon').style.display = 'inline-block';
+        document.getElementById('loader-icon').style.display = 'none';
+
+        showToast('Error: ' + error.message, '#d9534f');
+    });
+});
+
+function showToast(message, bgColor) {
+    const container = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    toast.textContent = message;
+    toast.style.background = bgColor;
+    toast.style.color = '#fff';
+    toast.style.padding = '12px 24px';
+    toast.style.marginTop = '8px';
+    toast.style.borderRadius = '6px';
+    toast.style.boxShadow = '0 2px 8px rgba(0,0,0,0.15)';
+    toast.style.fontWeight = 'bold';
+    toast.style.fontSize = '1rem';
+    toast.style.opacity = '0.95';
+    container.appendChild(toast);
+    setTimeout(() => {
+        toast.style.transition = 'opacity 0.5s';
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 500);
+    }, 3500);
+}
+</script>
+{% endblock %}
+</body>
+</html>

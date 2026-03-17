@@ -1,0 +1,225 @@
+
+/* PR Monitor - New PR Page Styles */
+:root {
+  --pr-bg: #ffffff;
+  --pr-surface: #f8f9fb;
+  --pr-text: #28323c;
+  --pr-muted: #6b7785;
+  --pr-border: #e6e9ef;
+  --pr-shadow: 0 2px 8px rgba(16, 24, 40, 0.08);
+
+}
+
+
+
+/* Container */
+.pr-container {
+  width: 100%;
+  padding: 16px;
+  min-height: 60vh; /* allow vertical centering space */
+}
+
+/* Responsive list as grid */
+.pr-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+/* Ensure each wrapper item spans full width */
+.pr-item {
+  width: 100%;
+}
+
+/* Empty state */
+.pr-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 40vh;
+  color: var(--pr-muted);
+  text-align: center;
+}
+.pr-empty-icon {
+  font-size: 44px;
+  line-height: 1;
+  color: #2563eb;
+  opacity: 0.9;
+}
+.pr-empty-text {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  .pr-list { grid-template-columns: 1fr; }
+}
+
+@media (min-width: 1200px) {
+  .pr-list { grid-template-columns: 1fr; }
+}
+
+/* Card */
+.pr-card {
+  width: 100%;
+  background: var(--pr-bg);
+  border: 1px solid var(--pr-border);
+  border-radius: 12px;
+  box-shadow: var(--pr-shadow);
+  overflow: hidden;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.pr-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(16, 24, 40, 0.12);
+  border-color: rgba(37, 99, 235, 0.25);
+}
+
+/* Header */
+.pr-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--pr-surface);
+  border-bottom: 1px solid var(--pr-border);
+}
+
+
+.pr-title-text {
+  margin: 0;
+  color: var(--pr-text);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+
+/* Body */
+.pr-card-body {
+  padding: 14px 16px 16px 16px;
+}
+
+
+.pr-meta {
+  display: grid;
+  align-items: center;
+  grid-auto-flow: column; /* keep in a single row with equal widths */
+  grid-auto-columns: 1fr; /* each item same width */
+  column-gap: 16px;
+  width: 100%;
+}
+
+.pr-meta-item {
+  color: var(--pr-text);
+  font-size: 14px;
+  min-width: 0; /* allow ellipsis to work in grid */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: flex;
+  gap: 6px;
+}
+
+.pr-meta-item strong {
+  color: var(--pr-muted);
+  font-weight: 600;
+  margin-right: 6px;
+}
+
+.pr-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+
+
+
+/* Status color variants */
+.status-open,
+.status-opened,
+.status-reopened,
+.status-merged {
+  color: #065f46;
+  background: rgba(22, 163, 74, 0.12);
+  border-color: rgba(22, 163, 74, 0.25);
+}
+
+.status-closed,
+.status-denied {
+  color: #7f1d1d;
+  background: rgba(220, 38, 38, 0.12);
+  border-color: rgba(220, 38, 38, 0.25);
+}
+
+/* Validation statuses */
+.status-not-an-issue,
+.status-no-issue,
+.status-none,
+.status-not-validated,
+.status-not_validated {
+  color: #1e3a8a;
+  background: rgba(59, 130, 246, 0.12);
+  border-color: rgba(59, 130, 246, 0.25);
+}
+.status-new-issue,
+.status-new_issue {
+  color: #92400e;
+  background: rgba(245, 158, 11, 0.14);
+  border-color: rgba(245, 158, 11, 0.35);
+}
+.status-breaking-issue,
+.status-breaking_issue {
+  color: #7f1d1d;
+  background: rgba(220, 38, 38, 0.12);
+  border-color: rgba(220, 38, 38, 0.25);
+}
+
+
+.pr-title-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+
+@media (max-width: 768px) {
+  .pr-meta {
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: 1fr 1fr; /* 2 columns on tablets */
+    column-gap: 16px;
+    row-gap: 8px;
+  }
+  .pr-meta-item { width: 100%; }
+}
+
+@media (max-width: 420px) {
+  .pr-card-header { padding: 12px; }
+  .pr-card-body { padding: 12px; }
+  .pr-meta { 
+    display: grid;
+    grid-template-columns: 1fr; /* single column on phones */
+    row-gap: 8px; 
+    column-gap: 14px; 
+  }
+  .pr-meta-item { width: 100%; }
+}
+
+.pr-card:focus-within,
+.pr-card:hover {
+  outline: none;
+}

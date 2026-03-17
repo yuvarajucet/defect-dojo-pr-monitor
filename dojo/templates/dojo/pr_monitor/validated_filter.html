@@ -1,0 +1,30 @@
+{% load static %}
+<!-- PR Monitor: Top-right multi-select filter dropdown -->
+<div class="pr-filter-toolbar" role="region" aria-label="PR Filters">
+  <div id="pr-filter-widget" class="pr-filter-widget" aria-label="PR Filters">
+    <button class="pfw-toggle" type="button" aria-haspopup="true" aria-expanded="false" title="Select filters">
+      <span class="pfw-toggle-icon" aria-hidden="true"><i class="fa-solid fa-filter"></i></span>
+      <span class="pfw-toggle-text">Filters</span>
+      <span class="pfw-badge" data-count="0" aria-hidden="true">0</span>
+    </button>
+
+    <div class="pfw-menu" role="menu" hidden>
+      <div class="pfw-menu-header">
+        <span>Filter by</span>
+        <button type="button" class="pfw-close" title="Close" aria-label="Close">×</button>
+      </div>
+      <div class="pfw-search">
+        <input type="text" class="pfw-search-input" placeholder="Search filters..." aria-label="Search filters" />
+      </div>
+      <div class="pfw-list" role="listbox" aria-multiselectable="true"></div>
+      <div class="pfw-actions">
+        <button type="button" class="pfw-clear btn-secondary">Clear</button>
+        <button type="button" class="pfw-apply btn-primary">Apply</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="{% static 'dojo/css/pr_monitor/filter.css' %}">
+
+<script src="{% static 'dojo/js/pr_monitor/validated_filter.js' %}"></script>

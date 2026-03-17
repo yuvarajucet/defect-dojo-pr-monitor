@@ -1,0 +1,80 @@
+# requirements.txt for DefectDojo using Python 3.x
+asteval==1.0.5
+bleach==6.1.0
+bleach[css]
+celery==5.5.2
+defusedxml==0.7.1
+django_celery_results==2.6.0
+django-auditlog
+django-dbbackup==4.3.0
+django-environ==0.11.0
+django-filter==24.3
+django-imagekit==5.0.0
+django-multiselectfield==0.1.13
+django-polymorphic==4.1.0
+django-crispy-forms==2.4
+django_extensions==3.2.3
+django-slack==5.19.0
+# This library is very outdated and not directly. It is used solely for migration
+# purposes to django-tagulous, so it must stay
+# django-tagging==0.5.0
+git+https://github.com/DefectDojo/django-tagging@develop#egg=django-tagging
+django-watson==1.6.3
+django-prometheus==2.3.1
+Django==4.2.23
+bs4==0.0.2
+djangorestframework
+html2text
+humanize
+jira
+PyGithub
+lxml
+Markdown
+openpyxl
+Pillow # required by django-imagekit
+psycopg
+cryptography
+python-dateutil
+pytz==2025.1
+redis==5.2.1
+requests==2.32.3
+sqlalchemy==2.0.41  # Required by Celery broker transport
+urllib3
+# uWSGI==2.0.29
+vobject
+whitenoise
+titlecase
+social-auth-app-django
+social-auth-core
+gitpython
+python-gitlab
+cpe
+packageurl-python
+django-crum
+JSON-log-formatter
+django-split-settings
+django-debug-toolbar
+django-debug-toolbar-request-history
+vcrpy
+vcrpy-unittest
+django-tagulous
+PyJWT
+cvss
+django-fieldsignals
+hyperlink
+django-test-migrations
+djangosaml2
+drf-spectacular
+drf-spectacular-sidecar
+django-ratelimit
+argon2-cffi
+blackduck
+# pycurl
+# boto3
+netaddr
+vulners
+fontawesomefree
+PyYAML
+pyopenssl
+parameterized
+psycopg2-binary

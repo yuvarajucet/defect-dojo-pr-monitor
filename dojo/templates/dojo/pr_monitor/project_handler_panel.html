@@ -1,0 +1,38 @@
+<div id="projectHandlerPanel" class="cf-panel" aria-labelledby="projectHandlerPanelLabel" role="dialog" aria-modal="true">
+  <div class="cf-panel__overlay" data-ph-close></div>
+  <aside class="cf-panel__container" role="document">
+    <header class="cf-panel__header">
+      <button type="button" class="cf-panel__close" aria-label="Close" data-ph-close>
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h4 class="cf-panel__title" id="projectHandlerPanelLabel">Assign Project Handler</h4>
+      <div class="cf-panel__actions"></div>
+    </header>
+    <div class="cf-panel__body">
+      <div class="cf-panel__content" tabindex="0">
+        <section class="cf-section">
+          <form id="ph-assign-form" class="cf-form" method="post" action="{% url 'assign_product_for_user' %}" novalidate>
+            {% csrf_token %}
+            <div class="cf-form__group">
+              <label for="ph-product" class="cf-label">Product</label>
+              <select id="ph-product" name="product_name" class="cf-input">
+                <option value="" selected disabled>Select a product</option>
+              </select>
+            </div>
+
+            <div class="cf-form__group">
+              <label for="ph-handler" class="cf-label">Handled By</label>
+              <select id="ph-handler" name="handled_by" class="cf-input">
+                <option value="" selected disabled>Select a user</option>
+              </select>
+            </div>
+
+            <div class="cf-form__actions" style="margin-top:16px; display:flex; gap:8px;">
+              <button type="submit" class="btn btn-primary" id="ph-submit-btn">Assign</button>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+  </aside>
+</div>

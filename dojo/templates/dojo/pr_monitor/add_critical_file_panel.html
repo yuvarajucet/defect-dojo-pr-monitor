@@ -1,0 +1,43 @@
+<div id="criticalFilePanel" class="cf-panel" aria-labelledby="criticalFilePanelLabel" role="dialog" aria-modal="true">
+  <div class="cf-panel__overlay" data-cf-close></div>
+  <aside class="cf-panel__container" role="document">
+    <header class="cf-panel__header">
+      <button type="button" class="cf-panel__close" aria-label="Close" data-cf-close>
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h4 class="cf-panel__title" id="criticalFilePanelLabel">Add Critical File</h4>
+      <div class="cf-panel__actions"></div>
+    </header>
+    <div class="cf-panel__body">
+      <div class="cf-panel__content" tabindex="0">
+        <section class="cf-section">
+
+          <form id="cf-add-form" class="cf-form" action="{% url 'add_product_list' %}" data-add-action="{% url 'add_product_list' %}" data-update-action="{% url 'update_product_file_list' %}" data-delete-action="{% url 'delete_product_file_list' %}" method="post" novalidate>
+            {% csrf_token %}
+            <input type="hidden" id="cf-unique-id" name="unique_id" value="" />
+            <div class="cf-form__group">
+              <label for="cf-product" class="cf-label">Product</label>
+              <select id="cf-product" name="product_name" class="cf-input">
+                <option value="" selected>Select a product</option>
+              </select>
+            </div>
+
+            <div class="cf-form__group">
+              <label for="cf-repo" class="cf-label">Repo name</label>
+              <input type="text" id="cf-repo" name="reponame" class="cf-input" placeholder="syncfusion.service.base" />
+            </div>
+
+            <div class="cf-form__group">
+              <label for="cf-filenames" class="cf-label">Filenames</label>
+              <textarea id="cf-filenames" name="filenames" class="cf-input" rows="6" placeholder="accountController.cs,authController.cs"></textarea>
+            </div>
+            <div class="cf-form__actions" style="margin-top:16px; display:flex; gap:8px;">
+              <button type="submit" class="btn btn-primary" id="cf-submit-btn">Add</button>
+              <button type="button" class="btn btn-danger" id="cf-delete-btn" style="display:none;">Delete</button>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+  </aside>
+</div>

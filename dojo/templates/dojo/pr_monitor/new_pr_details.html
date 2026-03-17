@@ -1,0 +1,57 @@
+<div id="prDetailsModal" class="pr-details-panel" aria-labelledby="prDetailsModalLabel" role="dialog" aria-modal="true">
+    <div class="pr-details-panel__overlay" data-panel-close></div>
+    <aside class="pr-details-panel__container" role="document">
+        <header class="pr-details-panel__header">
+            <button type="button" class="panel-close" aria-label="Close details" data-panel-close>
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="panel-title" id="prDetailsModalLabel">Pull Request Details</h4>
+            <a href="#" class="btn btn-primary pr-details-link" target="_blank" rel="noopener noreferrer">Open Pull Request</a>
+        </header>
+        <div class="pr-details-panel__body">
+            <div class="pr-details-loading text-center">
+                <p class="text-muted">Loading pull request details&hellip;</p>
+            </div>
+            <div class="pr-details-error alert alert-danger hidden" role="alert"></div>
+            <div class="pr-details-content hidden" tabindex="0">
+                <div class="collapsible-card is-collapsed" data-collapsible>
+                    <button class="collapsible-card__header" type="button" aria-expanded="false" data-collapse-toggle="#section-pr-info">
+                        <h5 class="collapsible-card__title">PR Info</h5>
+                        <span class="collapsible-card__chevron" aria-hidden="true"></span>
+                    </button>
+                    <div class="collapsible-card__body" id="section-pr-info">
+                        <div class="table-responsive">
+                            <table class="table table-condensed">
+                                <tbody class="pr-monitor-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="collapsible-card is-collapsed" data-collapsible>
+                    <button class="collapsible-card__header" type="button" aria-expanded="false" data-collapse-toggle="#section-validation">
+                        <h5 class="collapsible-card__title">Validation Status</h5>
+                        <span class="collapsible-card__chevron" aria-hidden="true"></span>
+                    </button>
+                    <div class="collapsible-card__body" id="section-validation">
+                        <div class="validation-container">
+                            <div class="pr-validation-body"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="collapsible-card is-collapsed" data-collapsible>
+                    <button class="collapsible-card__header" type="button" aria-expanded="false" data-collapse-toggle="#section-commit-history">
+                        <h5 class="collapsible-card__title">Commit History</h5>
+                        <span class="collapsible-card__chevron" aria-hidden="true"></span>
+                    </button>
+                    <div class="collapsible-card__body" id="section-commit-history">
+                        <div class="timeline" id="pr-commits-timeline">
+                            <div class="pr-commits-body"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+</div>

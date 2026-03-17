@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load navigation_tags %}
+{% load static %}
+
+{% block add_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'dojo/css/pr_monitor/new_pr_page.css' %}">
+    <link rel="stylesheet" href="{% static 'dojo/css/pr_monitor/new_pr_details_panel.css' %}">
+{% endblock %}
+
+{% block content %}
+{{ block.super }}
+
+{% if show_validated_filter %}
+{% include "dojo/pr_monitor/validated_filter.html" %}
+{% endif %}
+
+<!-- Critical files filter toggle -->
+ {% if not show_validated_filter %}
+<div class="pr-toolbar" style="display:flex;align-items:center;justify-content:flex-end;gap:.75rem;margin:10px 0 14px 0;">
+    <label for="critical-filter-toggle" style="margin:0;user-select:none;cursor:pointer;">
+        <input type="checkbox" id="critical-filter-toggle" style="margin-right:.4rem;"> Show only critical files
+    </label>
+</div>
+{% endif %}
+
+<div class="pr-container">
+    <div class="pr-list">
+        {% if pr_list %}
+        {% for pr in pr_list %}
+        <div class="pr-item">
+            <div class="pr-card">
+                <div class="pr-card-header pr-header-activator" role="button" tabindex="0"
+                     data-pr-number="{{ pr.pr_number }}" data-pr-repo-name="{{ pr.repo_name }}" data-pr-product="{{ pr.product_id }}">
+                    <div class="pr-title">
+                        <h5 class="pr-title-text">
+                            <span class="pr-title-link" title="Open PR {{ pr.pr_number }} details">
+                                <i class="fa-solid fa-code-pull-request"></i> {{ pr.pr_number }}: {{ pr.pr_title }}
+                            </span>
+                        </h5>
+                    </div>
+                    <div class="pr-status">
+                        <span class="pr-status-text pr-badge status-{{ pr.validation_status|slugify }}" aria-label="Validation Status">{{ pr.validation_status }}</span>
+                    </div>
+                </div>
+
+                <div class="pr-card-body">
+                    <div class="pr-meta">
+                        <div class="pr-meta-item"><strong>Created By:</strong> {{ pr.created_by }}</div>
+                        <div class="pr-meta-item"><strong>Target Branch:</strong> {{ pr.target_branch }}</div>
+                        <div class="pr-meta-item"><strong>Product:</strong> {{ pr.product_id }}</div>
+                        <div class="pr-meta-item"><strong>PR Status:</strong> <span class="pr-badge status-{{ pr.pr_status|slugify }}">{{ pr.pr_status }}</span></div>
+                        <div class="pr-meta-item"><i class="fa-solid fa-user"></i> {{ pr.validated_by }}</div>
+                        <div class="pr-meta-item"><strong>Created At:</strong> {{ pr.created_at|date:"M d, Y h:i A" }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="pr-empty" role="status" aria-live="polite">
+            <div class="pr-empty-icon" aria-hidden="true"><i class="fa-solid fa-code-pull-request"></i></div>
+            <div class="pr-empty-text">No PR’s available</div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% include "dojo/pr_monitor/new_pr_details.html" %}
+
+{% block add_js %}
+    {{ block.super }}
+    <script src="{% static 'dojo/js/pr_monitor/new_page.js' %}?v=2"></script>
+{% endblock %}
+{% endblock %}

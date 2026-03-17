@@ -1,0 +1,129 @@
+/* Settings Tabs Styles - matches PR Monitor theme vars */
+:root {
+  /* falls back if not already defined */
+  --pr-bg: #ffffff;
+  --pr-surface: #f8f9fb;
+  --pr-text: #28323c;
+  --pr-muted: #6b7785;
+  --pr-border: #e6e9ef;
+  --pr-shadow: 0 2px 8px rgba(16, 24, 40, 0.08);
+}
+
+.settings-page {
+  padding: 16px;
+}
+
+.settings-tabs {
+  width: 100%;
+}
+
+/* Tablist as subtle toolbar */
+.settings-tablist {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 8px;
+  border: 1px solid var(--pr-border);
+  border-radius: 12px;
+  background: var(--pr-surface);
+  box-shadow: var(--pr-shadow);
+}
+
+.settings-tablist [role="tab"] {
+  appearance: none;
+  border: 1px solid var(--pr-border);
+  background: var(--pr-bg);
+  color: var(--pr-text);
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 120ms ease, border-color 120ms ease, box-shadow 120ms ease, color 120ms ease;
+}
+
+.settings-tablist [role="tab"]:hover {
+  border-color: rgba(37, 99, 235, 0.25);
+  box-shadow: 0 2px 8px rgba(16, 24, 40, 0.08);
+}
+
+.settings-tablist [role="tab"].is-active,
+.settings-tablist [role="tab"][aria-selected="true"] {
+  color: #1f3b8a;
+  background: rgba(59, 130, 246, 0.08);
+  border-color: rgba(59, 130, 246, 0.35);
+}
+
+/* Panels */
+.settings-panels {
+  margin-top: 12px;
+}
+
+.settings-panel {
+  border: 1px solid var(--pr-border);
+  border-radius: 12px;
+  background: var(--pr-bg);
+  box-shadow: var(--pr-shadow);
+  padding: 16px;
+}
+
+.settings-panel h2 {
+  margin-top: 0;
+  font-size: 18px;
+  color: var(--pr-text);
+}
+
+.settings-panel p {
+  color: var(--pr-muted);
+}
+
+/* Panel header and action button */
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-add-file {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--pr-border);
+  background: var(--pr-bg);
+  color: #1f3b8a;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 120ms ease, border-color 120ms ease, box-shadow 120ms ease, transform 80ms ease;
+}
+
+.btn-add-file:hover {
+  border-color: rgba(59, 130, 246, 0.35);
+  background: rgba(59, 130, 246, 0.06);
+  box-shadow: 0 2px 8px rgba(16, 24, 40, 0.08);
+}
+
+.btn-add-file:active {
+  transform: translateY(1px);
+}
+
+.btn-add-file svg {
+  color: currentColor;
+}
+
+@media (max-width: 480px) {
+  .settings-tablist {
+    padding: 6px;
+  }
+  .settings-tablist [role="tab"] {
+    padding: 6px 10px;
+  }
+}

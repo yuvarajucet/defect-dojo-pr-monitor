@@ -1,0 +1,177 @@
+/* Critical Files Accordion Card Styles */
+
+#tab-critical .cf-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+/* New: Repo row layout to place repo title left and Edit button right */
+#tab-critical .cf-repo-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 14px;
+  background: linear-gradient(180deg, #ffffff, #fafafa); /* match header, very light */
+  border: none; /* remove border */
+  border-radius: 8px;
+  margin: 6px 0; /* separation from list */
+  box-shadow: none; /* no inset shadow */
+}
+
+
+
+/* Tighten title inside the row and increase contrast */
+#tab-critical .cf-repo-top .cf-repo-title {
+  margin: 0;
+  color: #111827; /* gray-900 */
+}
+
+/* Add spacing between the row and its file list */
+#tab-critical .cf-repo-top + .cf-file-list {
+  margin-top: 8px;
+}
+
+/* Keep Edit button readable on the highlighted background */
+#tab-critical .cf-repo-top .btn-edit {
+  background: #ffffff;
+}
+
+#tab-critical .cf-card {
+  width: 100%;
+  border: 1px solid #e5e7eb; /* gray-200 */
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  overflow: hidden;
+}
+
+#tab-critical .cf-card-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  background: linear-gradient(180deg, #ffffff, #fafafa);
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+#tab-critical .cf-card-header:focus-visible {
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.4); /* focus ring */
+}
+
+#tab-critical .cf-header-left {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0; /* allow text truncate */
+}
+
+#tab-critical .cf-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827; /* gray-900 */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#tab-critical .cf-arrow {
+  transition: transform 0.18s ease;
+  color: #6b7280; /* gray-500 */
+}
+
+#tab-critical .cf-card.is-open .cf-arrow {
+  transform: rotate(90deg);
+}
+
+#tab-critical .cf-actions {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#tab-critical .btn-edit {
+  appearance: none;
+  border: 1px solid #d1d5db; /* gray-300 */
+  background: #ffffff;
+  color: #111827; /* gray-900 */
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+#tab-critical .btn-edit:hover {
+  background: #f3f4f6; /* gray-100 */
+  border-color: #cbd5e1; /* gray-300 slightly darker */
+}
+
+#tab-critical .btn-edit:focus-visible {
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.4);
+}
+
+#tab-critical .cf-card-body {
+  padding: 10px 14px 14px 38px; /* indent to align with title after arrow */
+  border-top: 1px solid #f3f4f6;
+}
+
+#tab-critical .cf-file-list {
+  list-style: disc;
+  margin: 0;
+  padding-left: 22px;
+}
+
+#tab-critical .cf-file-list > li {
+  padding: 4px 0;
+  color: #374151; /* gray-700 */
+  word-break: break-all;
+}
+
+#tab-critical .cf-file-list > li:last-child {
+  border-bottom: none;
+}
+
+#tab-critical .cf-file-list > li.muted {
+  color: #9ca3af; /* gray-400 */
+  font-style: italic;
+  list-style-type: none; /* no bullet for empty state */
+}
+
+#tab-critical .cf-empty {
+  padding: 18px;
+  border: 1px dashed #e5e7eb;
+  border-radius: 8px;
+  color: #6b7280;
+  background: #fafafa;
+}
+
+/* Repo layout inside product card */
+#tab-critical .cf-repo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#tab-critical .cf-repo {
+  padding-top: 6px;
+}
+
+#tab-critical .cf-repo-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151; /* gray-700 */
+  margin: 4px 0 6px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

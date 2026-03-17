@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="settings-page">
+  <link rel="stylesheet" href="{% static 'dojo/css/pr_monitor/settings_tabs.css' %}?v=2">
+  <link rel="stylesheet" href="{% static 'dojo/css/pr_monitor/critical_file_panel.css' %}?v=2">
+  <link rel="stylesheet" href="{% static 'dojo/css/pr_monitor/critical_files.css' %}?v=3">
+
+  <h1 style="margin: 0 0 12px 0;">Settings</h1>
+
+  <div class="settings-tabs" role="tablist" aria-label="Settings Tabs">
+    <div class="settings-tablist">
+      <button type="button" role="tab" aria-selected="true" aria-controls="tab-critical" id="tabbtn-critical" class="is-active">Critical files</button>
+      <button type="button" role="tab" aria-selected="false" aria-controls="tab-handler" id="tabbtn-handler">Project Handler</button>
+      <button type="button" role="tab" aria-selected="false" aria-controls="tab-webhook" id="tabbtn-webhook">Webhook</button>
+    </div>
+
+    <div class="settings-panels">
+      <section id="tab-critical" class="settings-panel" role="tabpanel" aria-labelledby="tabbtn-critical" data-endpoint="{% url 'get_files_by_product' %}" data-products-endpoint="{% url 'get_product_list' %}">
+        <div class="panel-header">
+          <h2 style="margin: 0;">Critical files</h2>
+          <div class="header-actions">
+            <button type="button" id="btn-add-critical-file" class="btn-add-file" aria-label="Add new critical file">
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              <span>Add New</span>
+            </button>
+          </div>
+        </div>
+        <div id="cf-accordion" class="cf-accordion" aria-live="polite" aria-busy="false"></div>
+      </section>
+
+      <section id="tab-handler" class="settings-panel" role="tabpanel" aria-labelledby="tabbtn-handler" hidden data-endpoint="{% url 'get_project_handler_info' %}" data-products-endpoint="{% url 'get_product_list' %}" data-users-endpoint="{% url 'get_users_list' %}" data-delete-endpoint="{% url 'delete_product_for_user' %}">
+        <div class="cf-toolbar" style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+          <h2 style="margin:0;">Project Handlers</h2>
+          <div class="cf-actions">
+            <button type="button" id="btn-assign-project" class="btn-add-file" aria-label="Assign project">
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              <span>Assign project</span>
+            </button>
+          </div>
+        </div>
+        <div id="ph-table-host" class="ph-table-host" style="margin-top:12px;"></div>
+      </section>
+
+      <section id="tab-webhook" class="settings-panel" role="tabpanel" aria-labelledby="tabbtn-webhook" hidden data-webhook-value="{% url 'webhook_handler' %}">
+        <div class="wh-row" style="margin-top:8px; display:flex; gap:8px; align-items:center; max-width:720px;">
+          <input id="wh-url" type="text" class="cf-input" value="" style="flex:1;" disabled>
+          <button id="wh-copy-btn" type="button" class="btn btn-secondary" aria-label="Copy" title="Copy">
+            <i class="fa-regular fa-copy" aria-hidden="true"></i>
+          </button>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  {% include "dojo/pr_monitor/add_critical_file_panel.html" %}
+  {% include "dojo/pr_monitor/project_handler_panel.html" %}
+
+  <script src="{% static 'dojo/js/pr_monitor/settings_tabs.js' %}?v=2"></script>
+  <script src="{% static 'dojo/js/pr_monitor/critical_files.js' %}?v=4"></script>
+  <script src="{% static 'dojo/js/pr_monitor/project_handler.js' %}"></script>
+  <script src="{% static 'dojo/js/pr_monitor/webhook.js' %}?v=3"></script>
+</div>
+{% endblock %}

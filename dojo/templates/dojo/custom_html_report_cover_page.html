@@ -1,0 +1,19 @@
+{% load display_tags %}
+{% load static %}
+
+<div class="cover_page_size" id="cover_page">
+<link href="{% static 'dojo/css/custom_html_report_cover_page.css' %}" rel="stylesheet">
+    <div class="left-gray-triangle"></div>
+    <div class="top-right-blue"></div>
+    <div class="logo-container">
+        <img src="{% static '/dojo/img/syncfusion-logo.png' %}" alt="Syncfusion Logo" />
+    </div>
+    <div class="main-content">
+        <p class="cover_page_heading" id="heading">{{ heading }}</p>
+        <p class="cover_page_sub_heading" id="sub_heading">{{ sub_heading }}</p>
+        <p class="cover_page_meta_info" id="meta_info">{{ meta_info }}</p>
+        <div class="author">
+            <p><strong>Generated:</strong> {% display_date %}</p>
+        </div>
+    </div>
+</div>
